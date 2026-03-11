@@ -1,1 +1,4 @@
-Require all denied
+# Block direct access to PHP files — they're included via index.php
+<FilesMatch "\.php$">
+    Require all denied
+</FilesMatch>
