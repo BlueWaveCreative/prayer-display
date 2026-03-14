@@ -13,6 +13,7 @@
     <h1>Prayer Display</h1>
     <nav>
       <a href="<?= url('/admin') ?>">Churches</a>
+      <a href="<?= url('/admin/readme') ?>">How It Works</a>
       <span class="admin-user"><?= h($admin['name']) ?></span>
       <a href="<?= url('/admin/logout') ?>">Logout</a>
     </nav>

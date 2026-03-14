@@ -52,6 +52,7 @@ $pageMap = [
     'admin/church/new'       => 'pages/admin/church-edit.php',
     'admin/church/edit'      => 'pages/admin/church-edit.php',
     'admin/church/authorize' => 'pages/admin/church-authorize.php',
+    'admin/readme'           => 'pages/admin/readme.php',
     'oauth/callback'         => 'pages/oauth/callback.php',
 ];
 
