@@ -143,6 +143,7 @@ $churchSlug = h($church['slug']);
           apiUrl += '&simulate=' + pageParams.get('simulate');
         }
 
+        apiUrl += '&_t=' + Date.now();
         var response = await fetch(apiUrl);
         var data = await response.json();
         var container = document.getElementById('scroll-container');
