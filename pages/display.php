@@ -126,6 +126,7 @@ $churchSlug = h($church['slug']);
     var REFRESH_INTERVAL = 60000; // 1 minute
     var SCROLL_SPEED = 30;        // pixels per second
     var CHURCH_SLUG = '<?= $churchSlug ?>';
+    var APP_VERSION = null;
 
     function ensureStructure() {
       var container = document.getElementById('scroll-container');
@@ -146,6 +147,17 @@ $churchSlug = h($church['slug']);
         apiUrl += '&_t=' + Date.now();
         var response = await fetch(apiUrl);
         var data = await response.json();
+
+        // Auto-reload if app version changed (new deploy)
+        if (data.version) {
+          if (APP_VERSION === null) {
+            APP_VERSION = data.version;
+          } else if (APP_VERSION !== data.version) {
+            location.reload();
+            return;
+          }
+        }
+
         var container = document.getElementById('scroll-container');
 
         if (!data.success) {
