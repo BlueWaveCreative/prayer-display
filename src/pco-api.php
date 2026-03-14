@@ -72,9 +72,14 @@ function pcoFetchCheckIns(int $churchId, string $eventId, string $timezone): ?ar
     $db->prepare('UPDATE church_tokens SET last_api_success_at = NOW(), last_api_error = NULL WHERE church_id = ?')
        ->execute([$churchId]);
 
-    // Return sorted names
+    // Return names sorted by last name so families group together
     $nameList = array_values($names);
-    sort($nameList);
+    usort($nameList, function ($a, $b) {
+        $aLast = substr(strrchr($a, ' '), 1) ?: $a;
+        $bLast = substr(strrchr($b, ' '), 1) ?: $b;
+        $cmp = strcasecmp($aLast, $bLast);
+        return $cmp !== 0 ? $cmp : strcasecmp($a, $b);
+    });
     return $nameList;
 }
 

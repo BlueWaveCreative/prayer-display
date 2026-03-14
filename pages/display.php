@@ -167,10 +167,9 @@ $churchSlug = h($church['slug']);
 
         ensureStructure();
         var wrapper = document.getElementById('names-wrapper');
-        var sortedNames = data.names.sort();
-        var listHTML = sortedNames.map(function(name) { return '<li>' + name + '</li>'; }).join('');
+        var listHTML = data.names.map(function(name) { return '<li>' + name + '</li>'; }).join('');
 
-        if (sortedNames.length >= 6) {
+        if (data.names.length >= 6) {
           wrapper.innerHTML = '<ul class="names-list">' + listHTML + '</ul><ul class="names-list">' + listHTML + '</ul>';
           var tempList = document.createElement('ul');
           tempList.innerHTML = listHTML;
