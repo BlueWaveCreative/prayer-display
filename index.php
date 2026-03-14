@@ -17,6 +17,10 @@ require_once APP_ROOT . '/src/auth.php';
 require_once APP_ROOT . '/src/pco-oauth.php';
 require_once APP_ROOT . '/src/pco-api.php';
 
+// Prevent SiteGround nginx proxy from caching dynamic responses
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Pragma: no-cache');
+
 $route = trim($_GET['route'] ?? '', '/');
 
 // --- API routes ---
