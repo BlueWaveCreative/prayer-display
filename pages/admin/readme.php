@@ -79,6 +79,19 @@ require APP_ROOT . '/templates/admin-header.php';
 
   <hr>
 
+  <h3>Health Alerts</h3>
+  <p>A cron job runs every <strong>30 minutes</strong> and checks each active church for problems:</p>
+  <ul>
+    <li>Missing or expired OAuth token</li>
+    <li>API errors recorded</li>
+    <li>No successful API call in 6+ hours</li>
+    <li>Missing PCO event ID</li>
+  </ul>
+  <p>If any issues are found, an email is sent to <strong>kenny@</strong> and <strong>josh@bluewavecreativedesign.com</strong>. Alerts won't repeat for the same church within 2 hours to avoid spam.</p>
+  <p>Cron log: <code>logs/cron.log</code></p>
+
+  <hr>
+
   <h3>Adding a New Church</h3>
   <ol>
     <li>Log into this admin panel</li>
@@ -121,6 +134,16 @@ require APP_ROOT . '/templates/admin-header.php';
   <div class="callout callout-info">
     <strong>Deploys take effect immediately.</strong> The app sends <code>Cache-Control: no-store</code> headers so SiteGround's nginx proxy won't cache responses. If a deploy ever seems stuck, flush the Dynamic Cache as a last resort: Site Tools &rarr; Speed &rarr; Caching &rarr; Dynamic Cache &rarr; Flush.
   </div>
+
+  <hr>
+
+  <h3>Auto-Refresh on Deploy</h3>
+  <p>Display pages automatically reload within 60 seconds of a deploy. No manual refresh needed.</p>
+  <ul>
+    <li>Each deploy generates a <code>version.txt</code> from the git commit hash</li>
+    <li>The API includes the version in every response</li>
+    <li>The display JS detects version changes and reloads the page</li>
+  </ul>
 
   <hr>
 
