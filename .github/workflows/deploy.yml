@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Generate version.txt from git sha
+        run: echo "${{ github.sha }}" | cut -c1-7 > version.txt
+
       - name: Deploy via SFTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
