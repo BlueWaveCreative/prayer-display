@@ -118,10 +118,8 @@ require APP_ROOT . '/templates/admin-header.php';
     </tr>
   </table>
 
-  <div class="callout callout-warning">
-    <strong>After every deploy:</strong> Flush the SiteGround Dynamic Cache.<br>
-    Site Tools &rarr; Speed &rarr; Caching &rarr; Dynamic Cache &rarr; Flush Cache.<br>
-    Without this, SiteGround's nginx proxy may keep serving the old version.
+  <div class="callout callout-info">
+    <strong>Deploys take effect immediately.</strong> The app sends <code>Cache-Control: no-store</code> headers so SiteGround's nginx proxy won't cache responses. If a deploy ever seems stuck, flush the Dynamic Cache as a last resort: Site Tools &rarr; Speed &rarr; Caching &rarr; Dynamic Cache &rarr; Flush.
   </div>
 
   <hr>
@@ -187,9 +185,9 @@ require APP_ROOT . '/templates/admin-header.php';
   <h4>After deploying code changes</h4>
   <ol>
     <li>Verify GitHub Actions deploy succeeded (check the repo's Actions tab)</li>
-    <li>Flush SiteGround Dynamic Cache (Site Tools &rarr; Speed &rarr; Caching)</li>
-    <li>Hard refresh the page (Cmd+Shift+R / Ctrl+Shift+R)</li>
-    <li>Check browser dev tools &rarr; Network &rarr; look for <code>x-proxy-cache: MISS</code> on the API response</li>
+    <li>Changes should take effect immediately (no cache flush needed)</li>
+    <li>If something seems stuck: hard refresh (Cmd+Shift+R), then check <code>x-proxy-cache</code> header in dev tools — should be <code>MISS</code></li>
+    <li>Last resort: flush SiteGround Dynamic Cache (Site Tools &rarr; Speed &rarr; Caching)</li>
   </ol>
 
   <hr>
@@ -221,6 +219,7 @@ require APP_ROOT . '/templates/admin-header.php';
   .readme .info-table td:first-child { width: 180px; background: #fafafa; white-space: nowrap; }
   .readme .callout { padding: 14px 18px; border-radius: 6px; margin: 16px 0; }
   .readme .callout-warning { background: #fff8e1; border-left: 4px solid #ffc107; }
+  .readme .callout-info { background: #e8f4fd; border-left: 4px solid #2196f3; }
 </style>
 
 <?php require APP_ROOT . '/templates/admin-footer.php'; ?>
