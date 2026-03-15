@@ -117,8 +117,16 @@ if ($sent) {
 
     // Update cooldown timestamps
     foreach ($problems as $p) {
-        $db->prepare('UPDATE church_tokens SET last_alert_sent_at = NOW() WHERE church_id = ?')
-           ->execute([$p['church_id']]);
+        $check = $db->prepare('SELECT id FROM church_tokens WHERE church_id = ?');
+        $check->execute([$p['church_id']]);
+        if ($check->fetch()) {
+            $db->prepare('UPDATE church_tokens SET last_alert_sent_at = NOW() WHERE church_id = ?')
+               ->execute([$p['church_id']]);
+        } else {
+            // No token row yet — create a placeholder so cooldown works
+            $db->prepare('INSERT INTO church_tokens (church_id, access_token, refresh_token, token_expires_at, last_alert_sent_at) VALUES (?, "", "", NOW(), NOW())')
+               ->execute([$p['church_id']]);
+        }
     }
 } else {
     echo "ERROR: Failed to send alert email!\n";

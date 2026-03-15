@@ -38,12 +38,15 @@ require APP_ROOT . '/templates/admin-header.php';
     <li>Fill in the church name, slug, timezone, and PCO event ID</li>
     <li>Upload their background image if they have one</li>
     <li>Save the church, then click <strong>"Authorize"</strong> next to it on the dashboard</li>
-    <li>This generates a link &mdash; send it to the church's PCO admin</li>
-    <li>The admin opens the link, logs into PCO, and clicks "Allow"</li>
-    <li>Come back to the dashboard &mdash; token status should show <strong>"Healthy"</strong></li>
+    <li>You'll be redirected to Planning Center &mdash; log in as the church's PCO admin and click "Allow"</li>
+    <li>You'll be redirected back to the admin panel &mdash; token status should show <strong>"Healthy"</strong></li>
     <li>Open the display URL to verify it works: <code>bluewavecreativedesign.com/prayer/d/{slug}</code></li>
     <li>Have someone check in on PCO and confirm the name appears within 60 seconds</li>
   </ol>
+
+  <div class="callout callout-warning">
+    <strong>For churches you don't have PCO access to:</strong> You need to do the Authorize step together with their PCO admin &mdash; either on a screen share, in person, or by giving them temporary access to the admin panel. The person clicking "Authorize" must be able to log into that church's Planning Center account.
+  </div>
 
   <div class="callout callout-info">
     <strong>Finding the PCO Event ID:</strong> The church admin goes to Planning Center Check-Ins, clicks on the prayer event, and looks at the URL in their browser. The number at the end is the event ID. For example: <code>check-ins/events/<strong>945124</strong></code> &mdash; the event ID is <strong>945124</strong>.
